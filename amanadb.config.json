@@ -1,0 +1,7 @@
+{
+  "channelName": "mychannel",
+  "fabricSamplesPath": "~/fabric/fabric-samples",
+  "chaincodePath": "./amanadb-storage-engine",
+  "chaincodeName": "storage",
+  "gatewayPath": "./amanadb-api-gateway"
+}
