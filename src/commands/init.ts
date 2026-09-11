@@ -1,6 +1,7 @@
 import { execSync } from 'child_process';
 import * as fs from 'fs';
 import { loadConfig } from '../config';
+import { checkPreflight } from '../preflight';
 
 function checkDockerAccess(): void {
     try {
@@ -23,6 +24,7 @@ function checkDockerAccess(): void {
 }
 
 export function init(): void {
+    checkPreflight()
     const config = loadConfig();
     checkDockerAccess();
 
@@ -30,7 +32,7 @@ export function init(): void {
         console.log('fabric-samples not found — cloning...');
         const parentDir = require('path').dirname(config.fabricSamplesPath);
         fs.mkdirSync(parentDir, { recursive: true });
-        execSync('git clone https://github.com/hyperledger/fabric-samples.git', {
+        execSync('curl -sSL https://raw.githubusercontent.com/hyperledger/fabric/main/scripts/install-fabric.sh | bash -s -- docker samples binary', {
             cwd: parentDir,
             stdio: 'inherit',
         });
@@ -40,7 +42,7 @@ export function init(): void {
 
     const testNetworkDir = `${config.fabricSamplesPath}/test-network`;
     console.log('Bringing up the network...');
-    execSync(`./network.sh up createChannel -c ${config.channelName} -ca`, {
+    execSync(`./network.sh up createChannel -c ${config.channelName} -ca -s couchdb`, {
         cwd: testNetworkDir,
         stdio: 'inherit',
     });
