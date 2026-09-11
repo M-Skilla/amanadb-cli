@@ -9,19 +9,13 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devEngines": {
-    "packageManager": {
-      "name": "pnpm",
-      "version": "^11.21.0",
-      "onFail": "download"
-    }
-  },
   "type": "commonjs",
   "devDependencies": {
     "@types/node": "^22.20.2",
-    "typescript": "^7.0.2"
+    "typescript": "^5.7.2"
   },
   "dependencies": {
-    "commander": "^15.0.0"
+    "commander": "^15.0.0",
+    "ts-node": "^10.9.2"
   }
 }
